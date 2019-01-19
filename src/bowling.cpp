@@ -30,13 +30,14 @@ void BowlingScore::process_sequence()
 	for(size_t i=0; i<sequence.size() && counter_index<=12 ; )
 	{
 		char current_char = sequence[i];
-	 	char next_char = char(' ');
+	 	char next_char = ' ';
+		char next_next_char = ' ';
 
 		if(i+1<sequence.size()) next_char = sequence[i+1];
-		
+	        if(i+2<sequence.size()) next_next_char = sequence[i+2];	
 		Frame* current_frame = new Frame();
 
-		if(current_char == char('X'))
+		if(current_char == 'X')
 		{
 			std::cout << "Strike !" << std::endl;
 			
@@ -48,7 +49,7 @@ void BowlingScore::process_sequence()
 			++i;
 			++counter_index;
 		}
-		else if(next_char == char('/'))
+		else if(next_char == '/')
 		{
 			std::cout << "Spare !" << std::endl;
 			
@@ -60,16 +61,16 @@ void BowlingScore::process_sequence()
 			i += 2;
 			++counter_index;
 		}
-		else if(next_char == char('-'))
+		else if(next_next_char == '-' && current_char != 'X' && next_char != 'X' && current_char != '/' && next_char != '/')
 		{
 			std::cout << "Miss !" << std::endl;
-			std::cout << current_char << "  " << int(current_char)-48 << std::endl;		
-			current_frame->set_miss(int(current_char)-48);
+			
+			current_frame->set_miss(int(current_char)-48, int(next_char)-48);
 			current_frame->set_frame_index(counter_index);
 
 			frames.push_back(current_frame);
 
-			i += 2;
+			i += 3;
 			++counter_index;
 		}
 		else if(counter_index >= 10 and counter_index <= 12)
@@ -82,6 +83,11 @@ void BowlingScore::process_sequence()
 			
 			++i;
 			++counter_index;
+		}
+		else
+		{
+			std::cout << "Line not well detected !" << std::endl;
+		        break;
 		}
 	}
 
@@ -110,7 +116,7 @@ int BowlingScore::compute_total_score()
 
 		switch( (*it_frame)->get_property() )
 		{
-			case 0 :
+			case 0 : // strike
 				
 				f_score = 10;
 				
@@ -121,7 +127,7 @@ int BowlingScore::compute_total_score()
 						f_score += 10;
 						if(++it_frame != frames.end() && (*it_frame)->get_frame_index()  <= 11)
 						{
-							f_score += 10;
+							f_score += (*it_frame)->get_first_throw();
 						}
 						
 						--it_frame; // Just one decrementation to go to the next frame
@@ -137,7 +143,7 @@ int BowlingScore::compute_total_score()
 				frame_score.push_back(f_score);
 				break;
 
-			case 1 :
+			case 1 : // spare
 				
 				f_score = 10;
 
@@ -150,7 +156,7 @@ int BowlingScore::compute_total_score()
 				frame_score.push_back(f_score);
 				break;
 			
-			case 2 : 
+			case 2 : // miss
 				
 				f_score = (*it_frame)->get_total_pins_down();
 				frame_score.push_back(f_score);
@@ -158,13 +164,15 @@ int BowlingScore::compute_total_score()
 				++it_frame;
 				break;
 
-			case 3 : 
+			case 3 : // last throws
 				frame_score.push_back((*it_frame)->get_total_pins_down());
 				++it_frame;
 				break;
 		}
 	
 	}
+
+	for(size_t i=0; i<frame_score.size() ; ++i) std::cout<<"Frame/Score = " << i << " / " << frame_score[i] << std::endl;
 
 	line_score = std::accumulate(frame_score.begin(), frame_score.end(), 0);
 	
@@ -187,11 +195,11 @@ void Frame::set_spare(int first)
 	second_throw = 10 - first;
 }
 
-void Frame::set_miss(int score)
+void Frame::set_miss(int first, int second)
 {
 	property =  2; // "Miss"
-	first_throw = score;
-	second_throw = 0;
+	first_throw = first;
+	second_throw = second;
 }
 
 void Frame::set_last_throw(int score)

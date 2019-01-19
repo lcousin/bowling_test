@@ -21,7 +21,7 @@ class Frame
 
 		void set_strike();
 		void set_spare(int first);
-		void set_miss(int score);
+		void set_miss(int first, int second);
 		void set_last_throw(int score);
 		
 		void set_frame_index(int index) {frame_index = index;}
