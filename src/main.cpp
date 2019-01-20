@@ -39,5 +39,7 @@ int main(int argc, char ** argv)
 		
 	std::cout << " Score reached : " << computed_score << std::endl;
 
+	delete score;
+
 	return 0;
 }

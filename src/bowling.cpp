@@ -4,6 +4,18 @@
 
 BowlingScore::BowlingScore(){}
 
+BowlingScore::~BowlingScore()
+{
+	std::vector<Frame*>::iterator it_frame = frames.begin();
+
+	for( ; it_frame!=frames.end() ; ++it_frame)
+	{
+		delete *it_frame;
+	}
+
+	frames.clear();
+	frame_score.clear();
+}
 
 bool BowlingScore::test_strike(char c)
 {
