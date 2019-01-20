@@ -1,0 +1,51 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_7edde/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_7edde.dir/build.make CMakeFiles/cmTC_7edde.dir/build
+gmake[1] : on entre dans le répertoire « /home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_7edde.dir/CheckSymbolExists.cxx.o
+/usr/lib64/ccache/c++     -o CMakeFiles/cmTC_7edde.dir/CheckSymbolExists.cxx.o -c /home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTC_7edde
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7edde.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++       -rdynamic CMakeFiles/cmTC_7edde.dir/CheckSymbolExists.cxx.o  -o cmTC_7edde 
+/usr/bin/ld: CMakeFiles/cmTC_7edde.dir/CheckSymbolExists.cxx.o: in function `main':
+CheckSymbolExists.cxx:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld a retourné le statut de sortie 1
+gmake[1]: *** [CMakeFiles/cmTC_7edde.dir/build.make:87: cmTC_7edde] Error 1
+gmake[1] : on quitte le répertoire « /home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/CMakeTmp »
+gmake: *** [Makefile:121: cmTC_7edde/fast] Error 2
+
+File /home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_4920e/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_4920e.dir/build.make CMakeFiles/cmTC_4920e.dir/build
+gmake[1] : on entre dans le répertoire « /home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/CMakeTmp »
+Building CXX object CMakeFiles/cmTC_4920e.dir/CheckFunctionExists.cxx.o
+/usr/lib64/ccache/c++    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_4920e.dir/CheckFunctionExists.cxx.o -c /home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_4920e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4920e.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++   -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_4920e.dir/CheckFunctionExists.cxx.o  -o cmTC_4920e -lpthreads 
+/usr/bin/ld : ne peut trouver -lpthreads
+collect2: error: ld a retourné le statut de sortie 1
+gmake[1]: *** [CMakeFiles/cmTC_4920e.dir/build.make:87: cmTC_4920e] Error 1
+gmake[1] : on quitte le répertoire « /home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/CMakeTmp »
+gmake: *** [Makefile:121: cmTC_4920e/fast] Error 2
+
+

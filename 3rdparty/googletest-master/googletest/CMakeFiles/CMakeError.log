@@ -1,0 +1,33 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/cousin/Bureau/Test_Prog/repo_git/3rdparty/googletest-master/googletest/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_52929/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_52929.dir/build.make CMakeFiles/cmTC_52929.dir/build
+gmake[1] : on entre dans le répertoire « /home/cousin/Bureau/Test_Prog/repo_git/3rdparty/googletest-master/googletest/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_52929.dir/CheckSymbolExists.c.o
+/usr/lib64/ccache/cc    -o CMakeFiles/cmTC_52929.dir/CheckSymbolExists.c.o   -c /home/cousin/Bureau/Test_Prog/repo_git/3rdparty/googletest-master/googletest/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_52929
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_52929.dir/link.txt --verbose=1
+/usr/lib64/ccache/cc      -rdynamic CMakeFiles/cmTC_52929.dir/CheckSymbolExists.c.o  -o cmTC_52929 
+/usr/bin/ld: CMakeFiles/cmTC_52929.dir/CheckSymbolExists.c.o: in function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld a retourné le statut de sortie 1
+gmake[1]: *** [CMakeFiles/cmTC_52929.dir/build.make:87: cmTC_52929] Error 1
+gmake[1] : on quitte le répertoire « /home/cousin/Bureau/Test_Prog/repo_git/3rdparty/googletest-master/googletest/CMakeFiles/CMakeTmp »
+gmake: *** [Makefile:121: cmTC_52929/fast] Error 2
+
+File /home/cousin/Bureau/Test_Prog/repo_git/3rdparty/googletest-master/googletest/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+

@@ -124,8 +124,9 @@ int BowlingScore::check_sequence(std::string seq)
 	return status;
 }
 
-void BowlingScore::process_sequence()
+void BowlingScore::process_sequence(std::string the_line)
 {
+	line = the_line;
 	std::vector<char> sequence(line.begin(), line.end());
 
 	/*

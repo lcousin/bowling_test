@@ -1,0 +1,4 @@
+/home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/rebuild_cache.dir
+/home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/edit_cache.dir
+/home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/bowling_score.dir
+/home/cousin/Bureau/Test_Prog/repo_git/CMakeFiles/bowling_tests.dir
