@@ -47,6 +47,11 @@ class BowlingScore
                 void process_sequence();		
 		int compute_total_score();
 
+		bool test_strike(char c);
+		bool test_spare(char c0, char c1);
+		bool test_miss(char c0, char c1, char c2);
+		bool test_last(char c);
+
 	private:
 
 		std::string line;
