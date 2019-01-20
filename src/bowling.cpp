@@ -51,7 +51,7 @@ int BowlingScore::check_sequence(std::string seq)
 	std::vector<char> sequence(line.begin(), line.end());
 
 	int frame_number = 1;
-        int additional_throw = 0;
+        int additional_throw = -1;
 
 	for(size_t i=0 ; i<sequence.size() ; )
 	{
@@ -76,6 +76,7 @@ int BowlingScore::check_sequence(std::string seq)
 		}
 		else if( test_miss(current_char, next_char, next_next_char)  && frame_number <= 10)
 		{
+			if(frame_number == 10) additional_throw = 0;
 			i += 3;
 			++frame_number;
 		}
@@ -96,6 +97,18 @@ int BowlingScore::check_sequence(std::string seq)
 		}	
 	}
 
+	if(frame_number < 11) 
+	{
+		std::cout << " Wrong Sequence : only " << frame_number-1 << " frames." << std::endl;
+		++status;
+	}
+	
+	if(frame_number == 11 && additional_throw > 0)
+	{
+		std::cout << " Wrong Sequence : missing last throw(s)." <<std::endl;
+		++status;
+	}
+	
 	return status;
 }
 
