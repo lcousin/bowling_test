@@ -17,5 +17,12 @@ The line is composed by :
 --> Spare : "0" to "9" followed by "/". Example : 6/  
 --> Miss : 2 numbers between "0" and "9" plus sign "-". The sum of the 2 numbers should be less than 10. Example : 54-  
 
+--> Example of valid line :  
+
+./bowling_score XXXXXXXXXXXX  
+./bowling_score 5/5/5/5/5/5/5/5/5/5/5  
+./bowling_score 54-54-54-54-54-54-54-54-54-54-  
+./bowling_score X54-6/36-X9/81-4/XX81  
+
 Unit tests are available with the excutable :  
 ./bowling_tests  
