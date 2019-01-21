@@ -29,7 +29,7 @@ int main(int argc, char ** argv)
 		std::cout << seq << std::endl;
 	}
 
-	if(score->check_sequence(seq) > 0) 
+	if(score->check_sequence(seq, false) > 0) 
 	{
 		return 0;
 	}

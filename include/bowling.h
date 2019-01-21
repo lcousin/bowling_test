@@ -43,7 +43,7 @@ class BowlingScore
 		BowlingScore();
 		~BowlingScore();
 	
-		int check_sequence(std::string seq);
+		int check_sequence(std::string seq, bool test);
                 void process_sequence(std::string seq);		
 		int compute_total_score();
 		void reset();

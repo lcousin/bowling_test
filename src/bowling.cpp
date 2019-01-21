@@ -54,7 +54,7 @@ bool BowlingScore::test_last(char c)
 	else return false;
 }
 
-int BowlingScore::check_sequence(std::string seq)
+int BowlingScore::check_sequence(std::string seq, bool test)
 {	
 	// 0 to 9 in ascii code = 48 to 57
 	// X in ascii = 88
@@ -69,7 +69,7 @@ int BowlingScore::check_sequence(std::string seq)
 	std::vector<char> sequence(line.begin(), line.end());
 
 	int frame_number = 1;
-        int additional_throw = -1;
+        int additional_throw = 0;
 
 	for(size_t i=0 ; i<sequence.size() ; )
 	{
@@ -90,8 +90,10 @@ int BowlingScore::check_sequence(std::string seq)
 			frames.push_back(current_frame);
 
 			if(frame_number == 10) additional_throw = 2;
+			if(frame_number<=10) ++frame_number;
+			else if(frame_number==11) --additional_throw;
+
 			++i;
-			++frame_number;
 		}
 		else if( test_spare(current_char, next_char) && frame_number <= 10)
 		{
@@ -129,7 +131,7 @@ int BowlingScore::check_sequence(std::string seq)
 		}
 		else
 		{
-			std::cout << " Wrong Sequence : " << current_char << next_char << next_next_char
+			if(!test) std::cout << " Wrong Sequence : " << current_char << next_char << next_next_char
 				  << "  Index = " << i << std::endl;
 
 			// Write the sequence where the error is : to do.
@@ -141,16 +143,28 @@ int BowlingScore::check_sequence(std::string seq)
 
 	if(frame_number < 11) 
 	{
-		std::cout << " Wrong Sequence : only " << frame_number-1 << " frames." << std::endl;
+		if(!test) std::cout << " Wrong Sequence : only " << frame_number-1 << " frames." << std::endl;
 		++status;
 	}
-	
+
 	if(frame_number == 11 && additional_throw > 0)
 	{
-		std::cout << " Wrong Sequence : missing last throw(s)." <<std::endl;
+		if(!test) std::cout << " Wrong Sequence : missing last throw(s)." << std::endl;
 		++status;
 	}
 	
+	if(frame_number == 11 && additional_throw < 0)
+	{
+		if(!test) std::cout << " Wrong Sequence : incorrect number of last throw(s)." << std::endl;
+		++status;
+	}
+
+	if(frame_number > 11)
+	{
+		if(!test) std::cout << " Wrong Sequence : more than 10 frames (" << frame_number-1 << ")" << std::endl;
+		++status;
+	}
+
 	return status;
 }
 
