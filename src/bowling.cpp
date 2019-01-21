@@ -73,27 +73,51 @@ int BowlingScore::check_sequence(std::string seq)
 
 		if(i+1<sequence.size()) next_char = sequence[i+1];
 		if(i+2<sequence.size()) next_next_char = sequence[i+2];	
-		
+	
+		Frame* current_frame = new Frame();
+
 		if( test_strike(current_char) && frame_number <= 12)
 		{
+			current_frame->set_strike();
+		        current_frame->set_frame_index(frame_number);
+
+			frames.push_back(current_frame);
+
 			if(frame_number == 10) additional_throw = 2;
 			++i;
 			++frame_number;
 		}
 		else if( test_spare(current_char, next_char) && frame_number <= 10)
 		{
+				
+			// int(char) = ascii code - char of 0 (ascii code 48) to convert char to int :
+			current_frame->set_spare(int(current_char)-48);
+			current_frame->set_frame_index(frame_number);
+
+			frames.push_back(current_frame);
+			
 			if(frame_number == 10) additional_throw = 1;
 			i += 2;
 			++frame_number;
 		}
 		else if( test_miss(current_char, next_char, next_next_char)  && frame_number <= 10)
 		{
+			current_frame->set_miss(int(current_char)-48, int(next_char)-48);
+			current_frame->set_frame_index(frame_number);
+
+			frames.push_back(current_frame);
+
 			if(frame_number == 10) additional_throw = 0;
 			i += 3;
 			++frame_number;
 		}
 		else if( test_last(current_char) && additional_throw > 0 )
 		{
+			current_frame->set_last_throw(int(current_char)-48);
+			current_frame->set_frame_index(frame_number);
+
+			frames.push_back(current_frame);	
+			
 			++i;
 			--additional_throw;
 		}
@@ -122,95 +146,6 @@ int BowlingScore::check_sequence(std::string seq)
 	}
 	
 	return status;
-}
-
-void BowlingScore::process_sequence(std::string the_line)
-{
-	line = the_line;
-	std::vector<char> sequence(line.begin(), line.end());
-
-	/*
-	for(size_t i=0; i<sequence.size(); ++i)
-	{
-		std::cout << sequence[i] << std::endl;
-	}
-	*/
-
-	int counter_index = 1;
-
-	for(size_t i=0; i<sequence.size() && counter_index<=12 ; )
-	{
-		char current_char = sequence[i];
-	 	char next_char = ' ';
-		char next_next_char = ' ';
-
-		if(i+1<sequence.size()) next_char = sequence[i+1];
-	        if(i+2<sequence.size()) next_next_char = sequence[i+2];	
-
-		Frame* current_frame = new Frame();
-
-		if(current_char == 'X')
-		{
-			//std::cout << "Frame " << counter_index << " --> Strike" << std::endl;
-			
-			current_frame->set_strike();
-		        current_frame->set_frame_index(counter_index);
-
-			frames.push_back(current_frame);
-
-			++i;
-			++counter_index;
-		}
-		else if(next_char == '/')
-		{
-			//std::cout << "Frame " << counter_index << " --> Spare !" << std::endl;
-			
-			// int(char) = ascii code - char of 0 (4ascii code 48) to convert char to int :
-			current_frame->set_spare(int(current_char)-48);
-			current_frame->set_frame_index(counter_index);
-
-			frames.push_back(current_frame);
-
-			i += 2;
-			++counter_index;
-		}
-		else if(next_next_char == '-' && current_char != 'X' && next_char != 'X' && current_char != '/' && next_char != '/')
-		{
-			//std::cout << "Frame " << counter_index << " --> Miss !" << std::endl;
-			
-			current_frame->set_miss(int(current_char)-48, int(next_char)-48);
-			current_frame->set_frame_index(counter_index);
-
-			frames.push_back(current_frame);
-
-			i += 3;
-			++counter_index;
-		}
-		else if(counter_index >= 10 and counter_index <= 12)
-		{
-			//std::cout << "Frame 10 --> Last throws !" << std::endl;
-			current_frame->set_last_throw(int(current_char)-48);
-			current_frame->set_frame_index(counter_index);
-
-			frames.push_back(current_frame);
-			
-			++i;
-			++counter_index;
-		}
-		else
-		{
-			std::cout << "Frame not well detected !" << std::endl;
-		        break;
-		}
-	}
-/* 
- 	for the tests
-	std::cout << "frames = " << frames.size() << std::endl;
-	for(size_t j=0; j<frames.size() ; ++j)
-	{
-		std::cout << frames[j]->get_frame_index() << "  " << frames[j]->get_property() << "  " << frames[j]->get_total_pins_down() << std::endl;
-	}
-*/
 }
 
 int BowlingScore::compute_total_score()

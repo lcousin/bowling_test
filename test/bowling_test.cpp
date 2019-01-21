@@ -45,7 +45,7 @@ TEST(FULL_SEQ_TEST, TEST_LINE_300)
 	
 	std::string line = "XXXXXXXXXXXX";
 	
-	score->process_sequence( line );
+	score->check_sequence( line );
 	ASSERT_EQ(300, score->compute_total_score() );
 
 	delete score;
@@ -57,7 +57,7 @@ TEST(FULL_SEQ_TEST, TEST_LINE_150)
 	
 	std::string line = "5/5/5/5/5/5/5/5/5/5/5";
 	
-	score->process_sequence( line );
+	score->check_sequence( line );
 	ASSERT_EQ(150, score->compute_total_score() );
 
 	delete score;
@@ -69,7 +69,7 @@ TEST(FULL_SEQ_TEST, TEST_LINE_90)
 	
 	std::string line = "54-54-54-54-54-54-54-54-54-54-";
 	
-	score->process_sequence( line );
+	score->check_sequence( line );
 	ASSERT_EQ(90, score->compute_total_score() );
 
 	delete score;

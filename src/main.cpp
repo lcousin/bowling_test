@@ -34,7 +34,6 @@ int main(int argc, char ** argv)
 		return 0;
 	}
 
-	score->process_sequence(seq);
 	computed_score = score->compute_total_score();
 		
 	std::cout << " Score reached : " << computed_score << std::endl;
