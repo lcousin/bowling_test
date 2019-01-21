@@ -75,6 +75,55 @@ TEST(FULL_SEQ_TEST, TEST_LINE_90)
 	delete score;
 }
 
+TEST(FULL_SEQ_TEST, TEST_LINE_164)
+{
+	BowlingScore* score = new BowlingScore();
+	
+	std::string line= "X54-6/36-X9/81-4/XX81";
+	
+	score->check_sequence( line );
+	ASSERT_EQ(164, score->compute_total_score() );
+
+	delete score;
+}
+
+TEST(FULL_SEQ_TEST, TEST_LINE_151)
+{
+	BowlingScore* score = new BowlingScore();
+	
+	std::string line = "X54-6/36-X9/81-4/XX12";
+	
+	score->check_sequence( line );
+	ASSERT_EQ(151, score->compute_total_score() );
+
+	delete score;
+}
+
+TEST(FULL_SEQ_TEST, TEST_LINE_153)
+{
+	BowlingScore* score = new BowlingScore();
+	
+	std::string line = "X54-6/36-X9/81-4/X7/6";
+	
+	score->check_sequence( line );
+	ASSERT_EQ(153, score->compute_total_score() );
+
+	delete score;
+}
+
+TEST(FULL_SEQ_TEST, TEST_LINE_141)
+{
+	BowlingScore* score = new BowlingScore();
+	
+	std::string line = "X54-6/36-X9/81-4/X70-";
+	
+	score->check_sequence( line );
+	ASSERT_EQ(141, score->compute_total_score() );
+
+	delete score;
+}
+
+
 int main(int argc, char ** argv)
 {
 	::testing::InitGoogleTest(&argc, argv);

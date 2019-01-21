@@ -42,10 +42,11 @@ class BowlingScore
 
 		BowlingScore();
 		~BowlingScore();
-
+	
 		int check_sequence(std::string seq);
                 void process_sequence(std::string seq);		
 		int compute_total_score();
+		void reset();
 
 		bool test_strike(char c);
 		bool test_spare(char c0, char c1);

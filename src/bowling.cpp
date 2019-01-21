@@ -4,7 +4,7 @@
 
 BowlingScore::BowlingScore(){}
 
-BowlingScore::~BowlingScore()
+void BowlingScore::reset()
 {
 	std::vector<Frame*>::iterator it_frame = frames.begin();
 
@@ -15,6 +15,11 @@ BowlingScore::~BowlingScore()
 
 	frames.clear();
 	frame_score.clear();
+}
+
+BowlingScore::~BowlingScore()
+{
+	reset();
 }
 
 bool BowlingScore::test_strike(char c)
@@ -56,6 +61,7 @@ int BowlingScore::check_sequence(std::string seq)
 	// / in ascii = 47
 	// - in ascii = 45
 
+	reset();
 
 	line = seq;
         int status = 0;
