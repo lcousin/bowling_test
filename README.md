@@ -20,9 +20,13 @@ The line is composed by :
 --> Example of valid line :  
 
 ./bowling_score XXXXXXXXXXXX  
+300  
 ./bowling_score 5/5/5/5/5/5/5/5/5/5/5  
+150  
 ./bowling_score 54-54-54-54-54-54-54-54-54-54-  
+90  
 ./bowling_score X54-6/36-X9/81-4/XX81  
+164  
 
 Unit tests are available with the excutable :  
 ./bowling_tests  
