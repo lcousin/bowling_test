@@ -54,6 +54,11 @@ bool BowlingScore::test_last(char c)
 	else return false;
 }
 
+/** 
+* Check the line sequence and fill the frames. 
+* @param seq : bowling line to test
+* @param test : false draw the errors in the line sequence, true doesn't print errors
+*/ 
 int BowlingScore::check_sequence(std::string seq, bool test)
 {	
 	// 0 to 9 in ascii code = 48 to 57
@@ -89,9 +94,9 @@ int BowlingScore::check_sequence(std::string seq, bool test)
 
 			frames.push_back(current_frame);
 
-			if(frame_number == 10) additional_throw = 2;
-			if(frame_number<=10) ++frame_number;
-			else if(frame_number==11) --additional_throw;
+			if(frame_number == 10) additional_throw = 2; 	// if frame 10 sets two more throws.
+			if(frame_number<=10) ++frame_number; 		// limit the frame number to 10.
+			else if(frame_number==11) --additional_throw; 	// if frame_number > 10 and strike decrease the additional throws.
 
 			++i;
 		}
@@ -121,6 +126,7 @@ int BowlingScore::check_sequence(std::string seq, bool test)
 		}
 		else if( test_last(current_char) && additional_throw > 0 )
 		{
+			// Last throw treated as a new frame.
 			current_frame->set_last_throw(int(current_char)-48);
 			current_frame->set_frame_index(frame_number);
 
@@ -132,9 +138,7 @@ int BowlingScore::check_sequence(std::string seq, bool test)
 		else
 		{
 			if(!test) std::cout << " Wrong Sequence : " << current_char << next_char << next_next_char
-				  << "  Index = " << i << std::endl;
-
-			// Write the sequence where the error is : to do.
+				  << " Index = " << i << std::endl;
 
 			++status;
 			break;
@@ -143,7 +147,7 @@ int BowlingScore::check_sequence(std::string seq, bool test)
 
 	if(frame_number < 11) 
 	{
-		if(!test) std::cout << " Wrong Sequence : only " << frame_number-1 << " frames." << std::endl;
+		if(!test) std::cout << " Wrong Sequence : only " << frame_number-1 << " correct frames." << std::endl;
 		++status;
 	}
 
@@ -168,6 +172,9 @@ int BowlingScore::check_sequence(std::string seq, bool test)
 	return status;
 }
 
+/** 
+* Compute the score of the frames. 
+*/ 
 int BowlingScore::compute_total_score()
 {
 	std::vector<Frame*>::iterator it_frame = frames.begin();

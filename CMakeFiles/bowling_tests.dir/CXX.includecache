@@ -12,14 +12,6 @@ string
 vector
 -
 
-/home/cousin/Bureau/Test_Prog/repo_git/src/bowling.cpp
-../include/bowling.h
-/home/cousin/Bureau/Test_Prog/repo_git/include/bowling.h
-iostream
--
-numeric
--
-
 /home/cousin/Bureau/Test_Prog/repo_git/test/bowling_test.cpp
 gtest/gtest.h
 -

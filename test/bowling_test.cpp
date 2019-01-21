@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-//#include <gmock/gmock.h>
 #include "../include/bowling.h"
 
 // Test frame detection : 
@@ -66,6 +65,10 @@ TEST(WRONG_SEQ_TEST, TEST_LINE_WRONG_LINE_0)
 	std::string wrong_line_17 = "X54-6/36-X9/81-4/X5/a";
 	std::string wrong_line_18 = "X54-*/36-X9/81-4/X5/8";
 	std::string wrong_line_19 = "X54-";
+	std::string wrong_line_20 = " ";
+	std::string wrong_line_21 = "azerty";
+	std::string wrong_line_22 = ":;!&"; 			// be careful of the "&" on linux
+	std::string wrong_line_23 = "X54-6/36-X9/81-4/X9/81-";
 
 	ASSERT_GT( score->check_sequence( wrong_line_0, true ), 0);
 	ASSERT_GT( score->check_sequence( wrong_line_1, true ), 0);
@@ -87,6 +90,10 @@ TEST(WRONG_SEQ_TEST, TEST_LINE_WRONG_LINE_0)
 	ASSERT_GT( score->check_sequence( wrong_line_17, true ), 0);
 	ASSERT_GT( score->check_sequence( wrong_line_18, true), 0);
 	ASSERT_GT( score->check_sequence( wrong_line_19, true ), 0);
+	ASSERT_GT( score->check_sequence( wrong_line_20, true ), 0);
+	ASSERT_GT( score->check_sequence( wrong_line_21, true ), 0);
+	ASSERT_GT( score->check_sequence( wrong_line_22, true ), 0);
+	ASSERT_GT( score->check_sequence( wrong_line_23, true ), 0);
 
 	delete score;
 }
