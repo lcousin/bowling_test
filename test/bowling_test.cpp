@@ -41,7 +41,7 @@ TEST(SEQ_TEST, TEST_LAST)
 
 // Test wrong sequences :
 
-TEST(WRONG_SEQ_TEST, TEST_LINE_WRONG_LINE_0)
+TEST(WRONG_SEQ_TEST, TEST_LINE_WRONG_LINE)
 {
 	BowlingScore* score = new BowlingScore();
 
@@ -67,7 +67,7 @@ TEST(WRONG_SEQ_TEST, TEST_LINE_WRONG_LINE_0)
 	std::string wrong_line_19 = "X54-";
 	std::string wrong_line_20 = " ";
 	std::string wrong_line_21 = "azerty";
-	std::string wrong_line_22 = ":;!&"; 			// be careful of the "&" on linux
+	std::string wrong_line_22 = ":;!&"; 			// be careful with the "&" on linux
 	std::string wrong_line_23 = "X54-6/36-X9/81-4/X9/81-";
 
 	ASSERT_GT( score->check_sequence( wrong_line_0, true ), 0);
@@ -100,7 +100,7 @@ TEST(WRONG_SEQ_TEST, TEST_LINE_WRONG_LINE_0)
 
 // Test some lines with good sequence :
 
-TEST(FULL_SEQ_TEST, TEST_LINE)
+TEST(GOOD_SEQ_TEST, TEST_LINE)
 {
 	BowlingScore* score = new BowlingScore();
 	
